@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Shortener SaaS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div class="max-w-4xl mx-auto p-6">
+    <header class="flex justify-between items-center py-4">
+      <h1 class="text-2xl font-bold">ShortlyAds</h1>
+      <nav class="space-x-3">
+        <a href="signup.html" class="text-indigo-300">Signup</a>
+        <a href="login.html" class="text-indigo-300">Login</a>
+        <a href="dashboard.html" class="text-indigo-300">Dashboard</a>
+      </nav>
+    </header>
+
+    <section class="mt-10 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h2 class="text-xl font-semibold">Shorten your URL</h2>
+      <p class="text-slate-400 mt-2">Login required. Monetized redirect with countdown.</p>
+
+      <div class="mt-6 space-y-3">
+        <input id="originalUrl" placeholder="https://example.com/very/long/link" class="w-full bg-slate-800 border border-slate-700 rounded p-3" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <input id="customAlias" placeholder="Custom alias (optional)" class="bg-slate-800 border border-slate-700 rounded p-3" />
+          <input id="expireHours" type="number" min="1" placeholder="Expire in hours (optional)" class="bg-slate-800 border border-slate-700 rounded p-3" />
+        </div>
+        <button id="shortenBtn" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-3 rounded font-semibold">Generate Short Link</button>
+      </div>
+
+      <div id="result" class="hidden mt-6 p-4 rounded bg-slate-800 border border-slate-700">
+        <p class="text-sm text-slate-400">Your short URL</p>
+        <div class="flex items-center gap-3 mt-1">
+          <a id="shortUrl" target="_blank" class="text-indigo-300 break-all"></a>
+          <button id="copyBtn" class="bg-emerald-600 px-3 py-1 rounded text-sm">Copy</button>
+        </div>
+        <img id="qrCode" alt="QR code" class="mt-4 w-36 h-36 rounded bg-white p-1" />
+      </div>
+      <p id="message" class="mt-4 text-sm"></p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting...</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
+  <main class="w-full max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center">
+    <h1 class="text-2xl font-bold">Please wait...</h1>
+    <p class="text-slate-300 mt-3">Your destination link is loading after ad view.</p>
+    <div class="mt-6 text-5xl font-extrabold text-indigo-400" id="counter">5</div>
+    <p id="status" class="mt-4 text-slate-400">Showing ad and countdown...</p>
+  </main>
+
+  <script src='//libtl.com/sdk.js' data-zone='10717096' data-sdk='show_10717096'></script>
+  <script>
+    const originalUrl = {{ original_url|tojson }};
+    const counterEl = document.getElementById('counter');
+    const statusEl = document.getElementById('status');
+
+    let seconds = 5;
+    const timer = setInterval(() => {
+      seconds -= 1;
+      counterEl.textContent = String(seconds);
+      if (seconds <= 0) clearInterval(timer);
+    }, 1000);
+
+    show_10717096().then(() => {
+      statusEl.textContent = 'Ad completed. Redirecting now...';
+      setTimeout(() => window.location.href = originalUrl, 5000);
+    }).catch(() => {
+      statusEl.textContent = 'Ad unavailable. Redirecting...';
+      setTimeout(() => window.location.href = originalUrl, 5000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetag Rewarded Popup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
+  <main class="w-full max-w-xl rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-2xl">
+    <h1 class="text-2xl font-bold mb-3">Rewarded Popup Demo</h1>
+    <p class="text-slate-300 mb-6">Click to show Monetag rewarded popup ad format.</p>
+    <button id="showPopupBtn" class="rounded-lg bg-emerald-600 px-5 py-3 font-semibold hover:bg-emerald-500 transition">Show Rewarded Popup</button>
+    <p id="status" class="mt-4 text-sm text-slate-400">Waiting for user action...</p>
+  </main>
+
+  <!-- Monetag SDK -->
+  <script src='//libtl.com/sdk.js' data-zone='10717096' data-sdk='show_10717096'></script>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const showPopupBtn = document.getElementById('showPopupBtn');
+
+    showPopupBtn.addEventListener('click', () => {
+      statusEl.textContent = 'Opening popup ad...';
+
+      // Rewarded Popup
+      show_10717096('pop').then(() => {
+        // user watch ad till the end or close it in interstitial format
+        // your code to reward user for rewarded format
+        statusEl.textContent = 'Popup flow completed.';
+      }).catch(e => {
+        // user get error during playing ad
+        // do nothing or whatever you want
+        statusEl.textContent = 'Popup failed: ' + (e?.message || 'unknown error');
+      });
+    });
+  </script>
+</body>
+</html>
