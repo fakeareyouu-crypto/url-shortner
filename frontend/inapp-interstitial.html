@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetag In-App Interstitial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
+  <main class="w-full max-w-xl rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-2xl">
+    <h1 class="text-2xl font-bold mb-3">In-App Interstitial Demo</h1>
+    <p class="text-slate-300 mb-6">This starts Monetag in-app interstitial behavior using your settings.</p>
+    <button id="startInAppBtn" class="rounded-lg bg-fuchsia-600 px-5 py-3 font-semibold hover:bg-fuchsia-500 transition">Start In-App Interstitial</button>
+    <p id="status" class="mt-4 text-sm text-slate-400">Waiting for user action...</p>
+  </main>
+
+  <!-- Monetag SDK -->
+  <script src='//libtl.com/sdk.js' data-zone='10717096' data-sdk='show_10717096'></script>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const startInAppBtn = document.getElementById('startInAppBtn');
+
+    startInAppBtn.addEventListener('click', () => {
+      statusEl.textContent = 'In-app interstitial initialized.';
+
+      // In-App Interstitial
+      show_10717096({
+        type: 'inApp',
+        inAppSettings: {
+          frequency: 2,
+          capping: 0.1,
+          interval: 30,
+          timeout: 5,
+          everyPage: false
+        }
+      });
+    });
+
+    /*
+    This value is decoded as follows:
+    - show automatically 2 ads
+      within 0.1 hours (6 minutes)
+      with a 30-second interval between them
+      and a 5-second delay before the first one is shown.
+      The last digit, 0, means that the session will be saved when you navigate between pages.
+      If you set the last digit as 1, then at any transition between pages,
+      the session will be reset, and the ads will start again.
+    */
+  </script>
+</body>
+</html>
