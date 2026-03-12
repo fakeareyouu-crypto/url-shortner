@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: url-shortener-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    rootDir: backend
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB_NAME
+        value: url_shortener
+      - key: JWT_SECRET
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
